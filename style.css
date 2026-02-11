@@ -1,0 +1,121 @@
+.hidden{
+  display: none;
+}
+
+.container {
+
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.apps{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card{
+  width: 250px;
+  border: 2px solid #272343;
+  border-radius: 8px;
+  padding: 15px;
+  background-color: #fffffe;
+  text-align: center;
+}
+
+
+
+.card h3{
+  color: #272343;
+  margin-bottom: 10px;
+}
+
+.card p{
+  font-size: 14px;
+  color: #666;
+}
+
+.card-img{
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #eee;
+}
+
+.card-body{
+  padding: 15px;
+}
+
+.btn{
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #e3f6f5;
+  color: #272343;
+  text-decoration: none;
+  border-radius: 4px;
+  border: 2px solid #272343;
+}
+
+.btn:hover{
+  background-color: #ffd803;
+}
+
+
+.top-wrapper {
+  padding: 180px 0 100px 0;
+  
+  background-size: cover;
+  background-color: #dfe0df;
+  text-align: center;
+}
+
+header {
+  background-color: #fffffe;
+
+  padding: 10px 0;
+}
+
+header .container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.logo {
+  width:auto;
+  height: 90px;
+  display: block;
+  margin-left: 10px;
+}
+
+.header-left {
+  float: left;
+}
+
+.header-right {
+  float: right;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: all 0.5s;
+}
+
+
+.header-right a {
+  line-height: 80px;
+  padding: 0 25px;
+  color: #dfe0df;
+  display: block;
+}
+footer {
+  background-color: #333; /* 暗めの色にするとサイトが締まる */
+  color: #fff;
+  padding: 40px 0;
+  margin-top: 50px;       /* コンテンツとの間に距離を置く */
+  text-align: center;
+}
+
+footer p {
+  font-size: 14px;
+  opacity: 0.8;           /* 少し文字を薄くする */
+}
