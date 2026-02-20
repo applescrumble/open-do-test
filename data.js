@@ -34,5 +34,11 @@ export const appList = [
     desc: "",
     link: "https://view.genially.com/69880744dea8f5798eae110d/interactive-content-",
     image: "images/change_card.webp"
+  },
+  { 
+    title: "アルファベットカード", 
+    desc: "",
+    link: "materials/letterCards",
+    image: ""
   }
 ];
