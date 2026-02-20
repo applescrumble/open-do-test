@@ -39,6 +39,6 @@ export const appList = [
     title: "アルファベットカード", 
     desc: "",
     link: "materials/letterCards",
-    image: ""
+    image: "images/alphabet_card.webp"
   }
 ];

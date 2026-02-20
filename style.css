@@ -8,6 +8,17 @@
   margin: 0 auto;
 }
 
+.info-wrapper{
+  
+  background-color: #e3f6f5;
+  padding: 15px;
+
+  justify-content: center;
+}
+.info-wrapper ul{
+  text-align: left;
+}
+
 .apps{
   display: flex;
   flex-wrap: wrap;
