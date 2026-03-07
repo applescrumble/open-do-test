@@ -39,24 +39,44 @@ let bingoAchieved=Array(bingoPatterns.length).fill(false);
 
 
 // ビンゴ判定
+// ビンゴ判定
 function checkBingo(){
-    const cells=document.querySelectorAll(".cell");
-    let newBingo=false;
+    const cells = document.querySelectorAll(".cell");
+    let newlyAchievedCount = 0; // 今回のチェックで「新たに」ビンゴになった列の数
 
-    bingoPatterns.forEach((pattern, index)=>{//patternはbingoPatternの要素、indexはbingoAchievedの番号
-      if(!bingoAchieved[index]){//あるパターンのビンゴがまだ出ていなければ
-            const isBingo=pattern.every(i=>//.everyは配列のすべての要素が条件を満たすかを判定。
-                cells[i].classList.contains("selected")
-            );
-        if(isBingo){
-            bingoAchieved[index]=true;//あるパターンのビンゴが出た、とフラグを立てて
-            newBingo=true;//新しくビンゴが出たということにする
-            pattern.forEach(i=>cells[i].classList.add("bingo"));//ビンゴになったセルに色をつける
-        } 
-      }
+    // 1. まず「現在の全パターンの状態」を一度リセットする
+    // これにより、クリックで選択解除された場合にビンゴから外れるようになる
+    bingoPatterns.forEach((pattern, index) => {
+        // 現在のセルが全選択されているかチェック
+        const isBingo = pattern.every(i => cells[i].classList.contains("selected"));
+        
+        // 判定結果を反映
+        if (isBingo) {
+            // まだフラグが立っていなかった列がビンゴになった場合、カウント
+            if (!bingoAchieved[index]) {
+                newlyAchievedCount++;
+            }
+            bingoAchieved[index] = true;
+            pattern.forEach(i => cells[i].classList.add("bingo"));
+        } else {
+            // ビンゴ条件を満たさなくなった場合、フラグを倒して色も消す
+            bingoAchieved[index] = false;
+            pattern.forEach(i => {
+                // 他のビンゴ列（縦と横の交差点など）の一部でないか確認が必要
+                // 簡易的には一度色を消して、後でもう一度つける処理にする
+                cells[i].classList.remove("bingo");
+            });
+        }
     });
 
-    return newBingo;//新しくビンゴが出たかどうか
+    // 2. 他のビンゴ列に含まれているセルが、色が消えっぱなしにならないよう再適用
+    bingoPatterns.forEach((pattern, index) => {
+        if (bingoAchieved[index]) {
+            pattern.forEach(i => cells[i].classList.add("bingo"));
+        }
+    });
+
+    return newlyAchievedCount > 0; // 新しくビンゴが「増えた」時だけtrueを返す
 };
 
 function renderBoard() {
@@ -69,7 +89,7 @@ function renderBoard() {
 
     if (arrayIndex===12){
       cell.textContent="★";
-      cell.classList.add("selected", "free-cell");
+      cell.classList.add("selected");
       statusList[alphabetIndex]=true;
     }else{
       cell.textContent=wordData[currentMode][alphabetIndex];
