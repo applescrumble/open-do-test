@@ -1,0 +1,85 @@
+:root {
+    --bg-color: #f0e6d2;
+    /* 文字ごとの色定義 */
+    --color-a: #e74c3c; --color-b: #3498db; --color-c: #2ecc71;
+    --color-d: #f1c40f; --color-e: #9b59b6; --color-f: #e67e22;
+    /* ... 他の文字も同様に追加可能 ... */
+}
+
+body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: sans-serif; }
+
+#app-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    height: 100vh;
+    background-color: var(--bg-color);
+    position: relative;
+}
+
+/* 中央のキャンバス */
+#main-canvas {
+    grid-column: 2 / 10;
+    grid-row: 2 / 6;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* カードの基本 */
+.card {
+    width: 60px;
+    height: 80px;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+}
+
+/* ストック内のカード配置用 */
+#stock-grid {
+    display: contents; /* 親のグリッドに直接参加 */
+}
+
+/* キャンバス上のカード（絶対配置） */
+.on-canvas {
+    position: absolute;
+    z-index: 100;
+    touch-action: none;
+}
+
+/* 色付きモードの適用 */
+.card.is-colored.letter-a { color: var(--color-a); }
+.card.is-colored.letter-b { color: var(--color-b); }
+.card.is-colored.letter-c { color: var(--color-c); }
+/* 必要に応じて z まで追加 */
+
+#toolbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+}
+
+#toolbar button {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+}

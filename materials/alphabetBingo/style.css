@@ -17,6 +17,47 @@ h1{
     font-size: 70px;
     margin: 10px;
 }
+.pop-effect {
+  display: inline-block;
+  animation: pop 1.5s ease-out;
+}
+
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.5);} /* 1.5倍に拡大 */
+  100% { transform: scale(1); }
+}
+.shimmer-effect {
+display: inline-block;
+font-weight: bold;
+
+animation:
+    pop 0.8s ease-out,
+    shine 1.8s linear;
+
+/* キラキラさせるための背景設定 */
+  background: linear-gradient(
+    110deg, 
+    #b69308 30%, 
+    #ffc935 50%, 
+    #fbe89a 70%
+  );
+  background-size: 200% auto;
+  
+  /* 文字を背景でくり抜く設定（これが無いとキラキラが見えません） */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important; /* 元の文字色を消して背景を見せる */
+  
+  /* もっとキラキラ感を出すなら影も追加 */
+  filter: drop-shadow(0 0 5px rgba(255, 204, 0, 0.5));
+}
+
+@keyframes shine {
+  0% { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
 #bingo-board{
     display: grid;
     grid-template-columns: repeat(5, 100px);

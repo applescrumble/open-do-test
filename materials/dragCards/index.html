@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alphabet Drag & Drop</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="app-container">
+        <div id="stock-grid"></div>
+
+        <div id="main-canvas"></div>
+
+        <div id="toolbar">
+            <button onclick="toggleCase()">大文字 / 小文字</button>
+            <button onclick="toggleColor()">色つき / なし</button>
+            <button onclick="shuffleStock()">シャッフル</button>
+            <button onclick="resetCanvas()">リセット</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

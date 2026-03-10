@@ -1,5 +1,6 @@
 const board = document.getElementById("bingo-board");
 const switchBtn = document.getElementById("switch");
+const title = document.getElementById("title");
 
 const wordData = {
   upper: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(""),
@@ -79,6 +80,15 @@ function checkBingo(){
     return newlyAchievedCount > 0; // 新しくビンゴが「増えた」時だけtrueを返す
 };
 
+function triggerPop(){
+  //title.classList.remove('pop-effect');
+  title.classList.remove('shimmer-effect');
+  void title.offsetWidth;
+  //title.classList.add('pop-effect');
+  title.classList.add('shimmer-effect');
+
+}
+
 function renderBoard() {
   board.innerHTML = "";//htmlをリセット
 
@@ -97,14 +107,19 @@ function renderBoard() {
         cell.classList.add("selected");
       }
     }
-
+bingoPatterns.forEach((pattern, pIndex) => {
+      if (bingoAchieved[pIndex] && pattern.includes(arrayIndex)) {
+        cell.classList.add("bingo");
+      }
+    });
     cell.addEventListener("click", ()=>{
       if(arrayIndex===12)return;
       statusList[alphabetIndex]=!statusList[alphabetIndex];
       cell.classList.toggle("selected");
 
       if (checkBingo()){
-        setTimeout(()=>alert("ビンゴ！🎉🎉🎉"), 100);
+        
+        triggerPop();
       }
     });
    
