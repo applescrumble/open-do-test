@@ -2,6 +2,8 @@ let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
 const stockGrid = document.getElementById('stock-grid');
 const mainCanvas = document.getElementById('main-canvas');
 let currentZIndex = 100;
+let isColorMode=false;
+let isUpperMode=false;
 
 // 初期化：外周にカードを並べる
 function initStock() {
@@ -23,7 +25,8 @@ function initStock() {
 function createCard(char) {
     const div = document.createElement('div');
     div.className = `card letter-${char.toLowerCase()}`;
-    div.textContent = char;
+    if(isColorMode)div.classList.add("is-colored");
+    div.textContent = isUpperMode ? char.toUpperCase() : char. toLowerCase();
     div.onmousedown = (e) => startDrag(e, div);
     return div;
 }
@@ -45,12 +48,15 @@ function startDrag(e, card) {
         target.style.left = rect.left + 'px';
         target.style.top = rect.top + 'px';
         document.body.appendChild(target); 
+
+        target.onmousedown=(event)=>startDrag(event, target);
     }
 
     // 重なり順を一番上にする
     target.style.zIndex = ++currentZIndex;
 
     // マウス移動時の処理
+    
     const shiftX = e.clientX - target.getBoundingClientRect().left;
     const shiftY = e.clientY - target.getBoundingClientRect().top;
 
@@ -69,6 +75,7 @@ function startDrag(e, card) {
         document.removeEventListener('mousemove', onMouseMove);
         document.onmouseup = null;
     };
+    target.ondragstart=function(){return false};;
 }
 
 // 外周の座標を計算するユーティリティ
@@ -83,16 +90,21 @@ function getPeripheralIndices(cols, rows) {
 
 // ツールバー機能
 function toggleCase() {
+    isUpperMode=!isUpperMode;
     const cards = document.querySelectorAll('#stock-grid .card');
     cards.forEach(c => {
-        const isUpper = c.textContent === c.textContent.toUpperCase();
-        c.textContent = isUpper ? c.textContent.toLowerCase() : c.textContent.toUpperCase();
+        //const isUpper = c.textContent === c.textContent.toUpperCase();
+        c.textContent = isUpperMode ? c.textContent.toUpperCase() : c.textContent.toLowerCase();
     });
 }
 
 function toggleColor() {
+    isColorMode=!isColorMode;
     const cards = document.querySelectorAll('#stock-grid .card');
-    cards.forEach(c => c.classList.toggle('is-colored'));
+    cards.forEach(c => {
+        if(isColorMode)c.classList.add("is-colored");
+        else c.classList.toggle('is-colored');
+});
 }
 
 function shuffleStock() {
