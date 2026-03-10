@@ -111,6 +111,10 @@ function shuffleStock() {
     alphabet.sort(() => Math.random() - 0.5);
     initStock();
 }
+function orderStock(){
+    alphabet.sort();
+    initStock();
+}
 
 function resetCanvas() {
     document.querySelectorAll('.on-canvas').forEach(c => c.remove());
