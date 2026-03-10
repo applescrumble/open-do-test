@@ -1,8 +1,15 @@
 :root {
     --bg-color: #f0e6d2;
     /* 文字ごとの色定義 */
-    --color-a: #e74c3c; --color-b: #3498db; --color-c: #2ecc71;
-    --color-d: #f1c40f; --color-e: #9b59b6; --color-f: #e67e22;
+    --color-a: orange; --color-b: blue; --color-c: blue;
+    --color-d: blue; --color-e: blue; --color-f: red;
+    --color-g: blue; --color-h: orange; --color-i: green;
+    --color-j: orange; --color-k: orange; --color-l: red;
+    --color-m: red; --color-n: red; --color-o: brown;
+    --color-p: #f1c40f; --color-q: pink; --color-r: brown;
+    --color-s: red; --color-t: blue; --color-u: pink;
+    --color-v: blue; --color-w: pink; --color-x: red;
+    --color-y: green; --color-z: blue;
     /* ... 他の文字も同様に追加可能 ... */
 }
 
@@ -61,6 +68,30 @@ body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family:
 .card.is-colored.letter-a { color: var(--color-a); }
 .card.is-colored.letter-b { color: var(--color-b); }
 .card.is-colored.letter-c { color: var(--color-c); }
+.card.is-colored.letter-d { color: var(--color-d); }
+.card.is-colored.letter-e { color: var(--color-e); }
+.card.is-colored.letter-f { color: var(--color-f); }
+.card.is-colored.letter-g { color: var(--color-g); }
+.card.is-colored.letter-h { color: var(--color-h); }
+.card.is-colored.letter-i { color: var(--color-i); }
+.card.is-colored.letter-j { color: var(--color-j); }
+.card.is-colored.letter-k { color: var(--color-k); }
+.card.is-colored.letter-l { color: var(--color-l); }
+.card.is-colored.letter-m { color: var(--color-m); }
+.card.is-colored.letter-n { color: var(--color-n); }
+.card.is-colored.letter-o { color: var(--color-o); }
+.card.is-colored.letter-p { color: var(--color-p); }
+.card.is-colored.letter-q { color: var(--color-q); }
+.card.is-colored.letter-r { color: var(--color-r); }
+.card.is-colored.letter-s { color: var(--color-s); }
+.card.is-colored.letter-t { color: var(--color-t); }
+.card.is-colored.letter-u { color: var(--color-u); }
+.card.is-colored.letter-v { color: var(--color-v); }
+.card.is-colored.letter-w { color: var(--color-w); }
+.card.is-colored.letter-x { color: var(--color-x); }
+.card.is-colored.letter-y { color: var(--color-y); }
+.card.is-colored.letter-z { color: var(--color-z); }
+
 /* 必要に応じて z まで追加 */
 
 #toolbar {
