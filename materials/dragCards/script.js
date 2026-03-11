@@ -9,7 +9,7 @@ let isUpperMode=false;
 function initStock() {
     stockGrid.innerHTML = '';
     // 外周のセル番号を定義（10x6のグリッドの外周）
-    const peripheralIndices = getPeripheralIndices(10, 6);
+    const peripheralIndices = getPeripheralIndices(10, 5);
     
     alphabet.forEach((char, i) => {
         const card = createCard(char);

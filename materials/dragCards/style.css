@@ -27,7 +27,7 @@ body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family:
 /* 中央のキャンバス */
 #main-canvas {
     grid-column: 2 / 10;
-    grid-row: 2 / 6;
+    grid-row: 2 / 5;
     background-color: rgba(255, 255, 255, 0.4);
     border-radius: 30px;
     position: relative;
