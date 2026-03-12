@@ -1,19 +1,20 @@
 :root {
-    --bg-color: #f0e6d2;
+    --bg-color: #f0e6d1;
     /* 文字ごとの色定義 */
-    --color-a: orange; --color-b: blue; --color-c: blue;
-    --color-d: blue; --color-e: blue; --color-f: red;
-    --color-g: blue; --color-h: orange; --color-i: green;
-    --color-j: orange; --color-k: orange; --color-l: red;
-    --color-m: red; --color-n: red; --color-o: brown;
-    --color-p: #f1c40f; --color-q: pink; --color-r: brown;
-    --color-s: red; --color-t: blue; --color-u: pink;
-    --color-v: blue; --color-w: pink; --color-x: red;
-    --color-y: green; --color-z: blue;
+    --color-a: #e5962c; --color-b: #346db9; --color-c: #346db9;
+    --color-d: #346db9; --color-e: #346db9; --color-f: #e61019;
+    --color-g: #346db9; --color-h: #e5962c; --color-i: #fddf08;
+    --color-j: #e5962c; --color-k: #e5962c; --color-l: #e61019;
+    --color-m: #e61019; --color-n: #e61019; --color-o: #c19e43;
+    --color-p: #346db9; --color-q: #ee77a5; --color-r: #c19e43;
+    --color-s: #e61019; --color-t: #346db9; --color-u: #ee77a5;
+    --color-v: #346db9; --color-w: #ee77a5; --color-x: #e61019;
+    --color-y: #fddf08; --color-z: #346db9;
     /* ... 他の文字も同様に追加可能 ... */
 }
 
-body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: sans-serif; }
+body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: "Arial Rounded MT Bold";
+    justify-content: center; }
 
 #app-container {
     display: grid;
@@ -22,6 +23,10 @@ body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family:
     height: 100vh;
     background-color: var(--bg-color);
     position: relative;
+
+    padding: 20px;
+    box-sizing: border-box;
+    gap:10px;
 }
 
 /* 中央のキャンバス */
@@ -36,8 +41,9 @@ body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family:
 
 /* カードの基本 */
 .card {
-    width: 60px;
-    height: 80px;
+    width: 70px;
+    height: 90px;
+    margin: auto;
     background: white;
     border: 2px solid #333;
     border-radius: 10px;
@@ -113,4 +119,52 @@ body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family:
     border-radius: 20px;
     border: none;
     font-weight: bold;
+    position: relative;
+}
+
+
+/* ツールチップの本体（共通設定） */
+#toolbar button.has-tooltip::after {
+    content: attr(data-tooltip); /* data-tooltipの中身を表示 */
+    position: absolute;
+    bottom: 170%; /* ボタンの少し上に配置 */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap; /* 改行させない */
+    opacity: 0; /* 最初は透明 */
+    visibility: hidden;
+    transition: opacity 0.3s; /* ふわっと出す */
+    pointer-events: none; /* 説明文が操作の邪魔をしないように */
+    z-index: 2000;
+
+}
+
+/* マウスが乗った時だけ表示 */
+#toolbar button:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 吹き出しの三角（お好みで） 
+#toolbar button::before {
+    content: "";
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}*/
+
+#toolbar button:hover::before {
+    opacity: 1;
+    visibility: visible;
 }
