@@ -46,5 +46,11 @@ export const appList = [
     desc: "",
     link: "materials/alphabetBingo",
     image: "images/alphabet_bingo.webp"
+  },
+  { 
+    title: "並べ替えカード②", 
+    desc: "",
+    link: "materials/dragCards",
+    image: "images/drag_card.webp"
   }
 ];
