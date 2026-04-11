@@ -1,0 +1,170 @@
+:root {
+    --bg-color: #f0e6d1;
+    /* 文字ごとの色定義 */
+    --color-a: #e5962c; --color-b: #346db9; --color-c: #346db9;
+    --color-d: #346db9; --color-e: #346db9; --color-f: #e61019;
+    --color-g: #346db9; --color-h: #e5962c; --color-i: #fddf08;
+    --color-j: #e5962c; --color-k: #e5962c; --color-l: #e61019;
+    --color-m: #e61019; --color-n: #e61019; --color-o: #c19e43;
+    --color-p: #346db9; --color-q: #ee77a5; --color-r: #c19e43;
+    --color-s: #e61019; --color-t: #346db9; --color-u: #ee77a5;
+    --color-v: #346db9; --color-w: #ee77a5; --color-x: #e61019;
+    --color-y: #fddf08; --color-z: #346db9;
+    /* ... 他の文字も同様に追加可能 ... */
+}
+
+body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: "Arial Rounded MT Bold";
+    justify-content: center; }
+
+#app-container {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    height: 100vh;
+    background-color: var(--bg-color);
+    position: relative;
+
+    padding: 20px;
+    box-sizing: border-box;
+    gap:10px;
+}
+
+/* 中央のキャンバス */
+#main-canvas {
+    grid-column: 2 / 10;
+    grid-row: 2 / 5;
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+/* カードの基本 */
+.card {
+    width: 70px;
+    height: 90px;
+    margin: auto;
+    background: white;
+    border: 2px solid #333;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    font-weight: 900;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.1s;
+}
+
+/* ストック内のカード配置用 */
+#stock-grid {
+    display: contents; /* 親のグリッドに直接参加 */
+}
+
+/* キャンバス上のカード（絶対配置） */
+.on-canvas {
+    position: absolute;
+    z-index: 100;
+    touch-action: none;
+}
+
+/* 色付きモードの適用 */
+.card.is-colored.letter-a { color: var(--color-a); }
+.card.is-colored.letter-b { color: var(--color-b); }
+.card.is-colored.letter-c { color: var(--color-c); }
+.card.is-colored.letter-d { color: var(--color-d); }
+.card.is-colored.letter-e { color: var(--color-e); }
+.card.is-colored.letter-f { color: var(--color-f); }
+.card.is-colored.letter-g { color: var(--color-g); }
+.card.is-colored.letter-h { color: var(--color-h); }
+.card.is-colored.letter-i { color: var(--color-i); }
+.card.is-colored.letter-j { color: var(--color-j); }
+.card.is-colored.letter-k { color: var(--color-k); }
+.card.is-colored.letter-l { color: var(--color-l); }
+.card.is-colored.letter-m { color: var(--color-m); }
+.card.is-colored.letter-n { color: var(--color-n); }
+.card.is-colored.letter-o { color: var(--color-o); }
+.card.is-colored.letter-p { color: var(--color-p); }
+.card.is-colored.letter-q { color: var(--color-q); }
+.card.is-colored.letter-r { color: var(--color-r); }
+.card.is-colored.letter-s { color: var(--color-s); }
+.card.is-colored.letter-t { color: var(--color-t); }
+.card.is-colored.letter-u { color: var(--color-u); }
+.card.is-colored.letter-v { color: var(--color-v); }
+.card.is-colored.letter-w { color: var(--color-w); }
+.card.is-colored.letter-x { color: var(--color-x); }
+.card.is-colored.letter-y { color: var(--color-y); }
+.card.is-colored.letter-z { color: var(--color-z); }
+
+/* 必要に応じて z まで追加 */
+
+#toolbar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    padding: 10px 20px;
+    border-radius: 50px;
+    display: flex;
+    gap: 15px;
+    z-index: 1000;
+}
+
+#toolbar button {
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 20px;
+    border: none;
+    font-weight: bold;
+    position: relative;
+}
+
+
+/* ツールチップの本体（共通設定） */
+#toolbar button.has-tooltip::after {
+    content: attr(data-tooltip); /* data-tooltipの中身を表示 */
+    position: absolute;
+    bottom: 170%; /* ボタンの少し上に配置 */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap; /* 改行させない */
+    opacity: 0; /* 最初は透明 */
+    visibility: hidden;
+    transition: opacity 0.3s; /* ふわっと出す */
+    pointer-events: none; /* 説明文が操作の邪魔をしないように */
+    z-index: 2000;
+
+}
+
+/* マウスが乗った時だけ表示 */
+#toolbar button:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 吹き出しの三角（お好みで） 
+#toolbar button::before {
+    content: "";
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #333;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s;
+}*/
+
+#toolbar button:hover::before {
+    opacity: 1;
+    visibility: visible;
+}
