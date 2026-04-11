@@ -3,25 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>並べ替えカード②</title>
+    <title>九九の割り算</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div id="app-container">
-        <div id="stock-grid"></div>
-
-        <div id="main-canvas"></div>
-
-        <div id="toolbar">
-            <button onclick="toggleCase()" >大文字 / 小文字</button>
-            <button onclick="toggleColor()" >色つき / なし</button>
-            <button onclick="shuffleStock()" >シャッフル</button>
-            <button onclick="orderStock()" >じゅんばん</button>
-            <button onclick="resetCanvas()" data-tooltip="真ん中のカードを全部消すよ。１枚ずつ消したいときはカードをダブルクリック" class="has-tooltip">リセット</button>
-        </div>
+    <div>
+        <h1>九九の割り算</h1>
+        <button onclick="startQuiz('easy')">１・２・３のだん</button>
+        <button onclick="startQuiz('normal')">４・５・６のだん</button>
+        <button onclick="startQuiz('hard')">７・８・９のだん</button>
     </div>
 
+    <div id="screen-quiz" style="display: none;">
+        <h2 id="question-number">だい　１　もん</h2>
+        <p id="question-text">ここに問題がでます</p>
+        <div id="choices">
+            <button id="choice1" onclick="checkAnswer(0)">たく　１</button>
+            <button id="choice2" onclick="checkAnswer(1)">たく　２</button>
+        </div>
+        <p id="feedback"></p>
+    </div>
+
+    <div id="screen-result" style="display: none;">
+        <h1>よくがんばったね！</h1>
+        <div id="result-illustration">（ここにイラスト）</div>
+        <p id="result-score"></p>
+        <div id="wrong-answers-list"></div>
+        <button onclick="backToStart()">もういちど　あそぶ</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
