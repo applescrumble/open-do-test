@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="app-container">
     <div id="screen-start">
         <h1>九九の割り算</h1>
         <button onclick="startQuiz('easy')">１・２・３のだん</button>
@@ -22,6 +23,9 @@
             <button id="choice2" onclick="checkAnswer(1)">たく　２</button>
         </div>
         <p id="feedback"></p>
+        <div style="background:#eee; border-radius:10px; height:10px;">
+  <div id="progress" style="background:#4caf50; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
+</div>
     </div>
 
     <div id="screen-result" style="display: none;">
@@ -31,6 +35,7 @@
         <h2>【ふくしゅう】まちがえた　もんだい</h2>
         <div id="wrong-answers-list"></div>
         <button onclick="backToStart()">もういちど　あそぶ</button>
+    </div>
     </div>
     <script src="script.js"></script>
 </body>

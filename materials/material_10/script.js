@@ -40,7 +40,11 @@ function checkAnswer(choiceIndex){
         if(isFirstTry){
             correctCount++;
         }
+        document.getElementById('choice1').disabled = true;
+        document.getElementById('choice2').disabled = true;
         setTimeout(()=>{
+            document.getElementById('choice1').disabled = false;
+            document.getElementById('choice2').disabled = false;
         if(questionCount<10){
             questionCount++;
             displayQuestion();
@@ -128,6 +132,8 @@ function createQuizSet(mode){
 function displayQuestion(){
     isFirstTry=true;
 
+    document.getElementById('feedback').innerText="";
+
     if(questionCount>10) return;
 
     const currentQ=quizSet[questionCount-1];
@@ -139,5 +145,8 @@ function displayQuestion(){
     document.getElementById('choice1').innerText=currentQ.choices[0];
     document.getElementById('choice2').innerText=currentQ.choices[1];
     }
+
+    const progress=(questionCount/10)*100;
+    document.getElementById('progress').style.width=progress+"%";
     //document.getElementById('feedback').innerText="";
 }
