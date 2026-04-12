@@ -3,6 +3,7 @@ let currentMode="";
 let questionCount=0;
 let correctCount=0;
 let wrongAnswers=[];
+let quizSet=[];
 
 //画面を切り替える共通関数
 function showScreen(screenId){
@@ -23,23 +24,32 @@ function startQuiz(mode){
     wrongAnswers=[];
 
     //クイズ画面へ切り替え
+    createQuizSet(mode);
+    displayQuestion();
     showScreen('screen-quiz');
 }
 
 function checkAnswer(choiceIndex){
-    const isCorrect=true;
+    
+    const currentQ=quizSet[questionCount-1];
+    const selectedAnswer=currentQ.choices[choiceIndex];
 
-    if(isCorrect){
-        alert("せいかい！");
+    if(selectedAnswer===currentQ.answer){
+        document.getElementById('feedback').innerText="せいかい！";
         questionCount++;
-        if(questionCount>10){
-            showResult();
+        setTimeout(()=>{
+        if(questionCount<10){
+            questionCount++;
+            displayQuestion();
         }else{
-            //次の問題へ
+            showResult();
         }
+        }, 1000);
     }else{
-        alert("ざんねん！もう一回考えてみてね。");
-        //間違えた問題を記録する処理など
+        document.getElementById('feedback').innerText="ざんねん！もう一回考えてみてね。";
+        if(!wrongAnswers.includes(currentQ.questionText)){
+            wrongAnswers.push(currentQ.questionText+"(答え：" + currentQ.answer + ")");
+        }
     }
 }
 
@@ -50,4 +60,60 @@ function showResult(){
 
 function backToStart(){
     showScreen('screen-start');
+}
+
+function generateQuestion(mode){
+    let minB, maxB;
+
+    if(mode==='easy'){
+        minB=1;
+        maxB=3;
+    }else if(mode==='normal'){
+        minB=4;
+        maxB=6;
+    }else{
+        minB=7;
+        maxB=9;
+    }
+
+    const B=Math.floor(Math.random()*(maxB-minB+1))+minB;
+    const C=Math.floor(Math.random()*10);
+    const A=B*C;
+
+    let wrongChoice;
+    do{
+        wrongChoice=Math.floor(Math.random()*10);
+    }while(wrongChoice===C);
+
+    const choices=[C, wrongChoice].sort(()=>Math.random()-0.5);
+
+    return{
+        questionText: `${A} ÷ ${B} = ?`,
+        answer: C,
+        choices: choices
+    };
+}
+
+
+function createQuizSet(mode){
+    quizSet=[];
+    while(quizSet.length<10){
+        const newQ=generateQuestion(mode);
+        const isDuplicate=quizSet.some(q=>q.questionText===newQ.questionText);
+        if(!isDuplicate){
+            quizSet.push(newQ);
+        }
+    }
+}
+
+function displayQuestion(){
+    const currentQ=quizSet[questionCount-1];
+
+    document.getElementById('question-number').innerText=`だい　${questionCount}もん`
+    document.getElementById('question-text').innerText=currentQ.questionText;
+
+    document.getElementById('choice1').innerText=currentQ.choices[0];
+    document.getElementById('choice2').innerText=currentQ.choices[1];
+
+    document.getElementById('feedback').innerText="";
 }
