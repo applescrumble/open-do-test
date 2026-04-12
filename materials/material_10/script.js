@@ -59,6 +59,21 @@ function checkAnswer(choiceIndex){
 
 function showResult(){
     document.getElementById('result-score').innerText=`10もん中 ${correctCount}もん　せいかい！`
+    
+    const listContainer=document.getElementById('wrong-answers-list');
+    listContainer.innerHTML="";
+
+    if(wrongAnswers.length===0){
+        listContainer.innerHTML="<p>ぜんぶ　いっかいで　せいかい！すごすぎる！</p>";
+    }else{
+        const ul=document.createElement('ul');
+        wrongAnswers.forEach(item=>{
+            const li=document.createElement('li');
+            li.innerText=item;
+            ul.appendChild(li);
+        });
+        listContainer.appendChild(ul);
+    }
     showScreen('screen-result');
 }
 
