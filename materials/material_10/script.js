@@ -4,6 +4,7 @@ let questionCount=0;
 let correctCount=0;
 let wrongAnswers=[];
 let quizSet=[];
+let isFirstTry=true;
 
 //画面を切り替える共通関数
 function showScreen(screenId){
@@ -36,7 +37,9 @@ function checkAnswer(choiceIndex){
 
     if(selectedAnswer===currentQ.answer){
         document.getElementById('feedback').innerText="せいかい！";
-        correctCount++;
+        if(isFirstTry){
+            correctCount++;
+        }
         setTimeout(()=>{
         if(questionCount<10){
             questionCount++;
@@ -46,6 +49,7 @@ function checkAnswer(choiceIndex){
         }
         }, 1000);
     }else{
+        isFirstTry=false;
         document.getElementById('feedback').innerText="ざんねん！もう一回考えてみてね。";
         if(!wrongAnswers.includes(currentQ.questionText)){
             wrongAnswers.push(currentQ.questionText+"(答え：" + currentQ.answer + ")");
@@ -107,6 +111,8 @@ function createQuizSet(mode){
 }
 
 function displayQuestion(){
+    isFirstTry=true;
+
     if(questionCount>10) return;
 
     const currentQ=quizSet[questionCount-1];
