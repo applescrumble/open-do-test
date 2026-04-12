@@ -73,3 +73,13 @@ button:hover {
   border-radius: 10px;
   margin: 20px 0;
 }
+
+#feedback {
+  /* 文字2つ分くらいの高さを確保しておく */
+  height: 2.5rem; 
+  line-height: 2.5rem;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* 枠が見えないようにしておけば、文字が出た時だけ目立ちます */
+}
