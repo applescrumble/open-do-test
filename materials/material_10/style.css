@@ -83,3 +83,28 @@ button:hover {
   font-weight: bold;
   /* 枠が見えないようにしておけば、文字が出た時だけ目立ちます */
 }
+
+/* CSS例 */
+.num-btn.selected {
+  background-color: #ff4500 !important;
+  border-bottom: 5px solid #b33000 !important;
+  transform: translateY(2px);
+}
+
+#number-selector{
+    display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 横に3つ、同じ幅で並べる */
+  gap: 15px;      /* ボタン同士のすきま */
+  width: 250px;   /* 全体の幅（お好みで調整） */
+  margin: 20px auto; /* 真ん中に寄せる */
+}
+
+.num-btn {
+  width: 70px;    /* 正方形に近づける */
+  height: 70px;
+  padding: 0;     /* パディングをリセット */
+  font-size: 1.8rem;
+  background-color: #e0e0e0;
+  color: #333;
+  border-bottom: 4px solid #999;
+}
