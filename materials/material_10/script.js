@@ -36,7 +36,7 @@ function checkAnswer(choiceIndex){
 
     if(selectedAnswer===currentQ.answer){
         document.getElementById('feedback').innerText="せいかい！";
-        questionCount++;
+        correctCount++;
         setTimeout(()=>{
         if(questionCount<10){
             questionCount++;
@@ -107,13 +107,16 @@ function createQuizSet(mode){
 }
 
 function displayQuestion(){
+    if(questionCount>10) return;
+
     const currentQ=quizSet[questionCount-1];
 
+    if(currentQ){
     document.getElementById('question-number').innerText=`だい　${questionCount}もん`
     document.getElementById('question-text').innerText=currentQ.questionText;
 
     document.getElementById('choice1').innerText=currentQ.choices[0];
     document.getElementById('choice2').innerText=currentQ.choices[1];
-
-    document.getElementById('feedback').innerText="";
+    }
+    //document.getElementById('feedback').innerText="";
 }
