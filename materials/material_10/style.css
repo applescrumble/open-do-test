@@ -64,6 +64,10 @@ button:hover {
   background-color: #4caf50;
   border-bottom: 5px solid #388e3c;
 }
+#choices button:hover {
+  background-color: #69b46b; /* ホバー時の色も設定できる */
+}
+
 
 /* 結果リスト */
 #wrong-answers-list {
@@ -84,27 +88,55 @@ button:hover {
   /* 枠が見えないようにしておけば、文字が出た時だけ目立ちます */
 }
 
-/* CSS例 */
+
 .num-btn.selected {
   background-color: #ff4500 !important;
   border-bottom: 5px solid #b33000 !important;
   transform: translateY(2px);
 }
 
-#number-selector{
-    display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 横に3つ、同じ幅で並べる */
-  gap: 15px;      /* ボタン同士のすきま */
-  width: 250px;   /* 全体の幅（お好みで調整） */
-  margin: 20px auto; /* 真ん中に寄せる */
+#number-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%; /* 親要素に合わせる */
+  max-width: 300px; /* 広がりすぎ防止 */
+  margin: 20px auto;
 }
 
 .num-btn {
-  width: 70px;    /* 正方形に近づける */
-  height: 70px;
-  padding: 0;     /* パディングをリセット */
-  font-size: 1.8rem;
-  background-color: #e0e0e0;
-  color: #333;
-  border-bottom: 4px solid #999;
+  width: 100%; /* グリッドの幅に合わせる */
+  aspect-ratio: 1 / 1; /* 正方形を維持 */
+  margin: 0; /* grid内ではmargin不要 */
+  font-size: 30px;
+}
+
+/* 紫色のボタン用の設定 */
+.btn-purple {
+  background-color: #9c27b0;
+  border-bottom-color: #7b1fa2;
+}
+
+.btn-purple:hover {
+  background-color: #ba68c8; /* ホバー時の色も設定できる */
+}
+
+/* けってい！ボタン用の設定（例） */
+.btn-orange {
+  background-color: #ff4500;
+  border-bottom-color: #b33000;
+}
+
+.btn-orange:hover {
+  background-color: #ff6f3b; /* ホバー時の色も設定できる */
+}
+
+/* もどるボタン用の設定（例） */
+.btn-gray {
+  background-color: #666;
+  border-bottom-color: #444;
+}
+
+.btn-gray:hover {
+  background-color: #838383; /* ホバー時の色も設定できる */
 }

@@ -52,6 +52,12 @@ export const appList = [
     desc: "",
     link: "materials/material_09",
     image: "materials/material_09/thumb.webp"
+  },
+  { 
+    title: "九九の割り算", 
+    desc: "",
+    link: "materials/material_10",
+    image: "materials/material_10/thumb.webp"
   }
 ];
 /*

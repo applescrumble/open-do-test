@@ -97,22 +97,36 @@ function checkAnswer(choiceIndex){
         }
         }, 1000);
     }else{
-        isFirstTry=false;
-        document.getElementById('feedback').innerText="ざんねん！もう一回考えてみてね。";
-        if(!wrongAnswers.includes(currentQ.questionText)){
-            wrongAnswers.push(currentQ.questionText+"(答え：" + currentQ.answer + ")");
-        }
+        isFirstTry = false;
+    document.getElementById('feedback').innerText = "ざんねん！もう一回考えてみてね。";
+    
+    // 1. まず、保存したい「完成した文字」を作る
+    const textToStore = currentQ.questionText + "(答え：" + currentQ.answer + ")";
+    
+    // 2. その「完成した文字」がリストにあるかチェックする
+    if (!wrongAnswers.includes(textToStore)) {
+        wrongAnswers.push(textToStore);
+    }
     }
 }
 
 function showResult(){
     document.getElementById('result-score').innerText=`10もん中 ${correctCount}もん　せいかい！`
     
+    const resultImg=document.getElementById('result-image');
+    if (correctCount === 10) {
+        resultImg.src = 'score_10.png'; // 満点の画像
+    } else if (correctCount >= 7) {
+        resultImg.src = 'score_good.png'; // 7-9点の画像
+    } else {
+        resultImg.src = 'score_fight.png'; // 6点以下の画像
+    }
+
     const listContainer=document.getElementById('wrong-answers-list');
     listContainer.innerHTML="";
 
     if(wrongAnswers.length===0){
-        listContainer.innerHTML="<p>ぜんぶ　いっかいで　せいかい！すごすぎる！</p>";
+        listContainer.innerHTML="<p>ぜんぶ　いっかいで　せいかい！<br>すごすぎる！</p>";
     }else{
         const ul=document.createElement('ul');
         wrongAnswers.forEach(item=>{
@@ -186,7 +200,7 @@ function displayQuestion(){
     const currentQ=quizSet[questionCount-1];
 
     if(currentQ){
-    document.getElementById('question-number').innerText=`だい　${questionCount}もん`
+    document.getElementById('question-number').innerText=`だい ${questionCount} もん`
     document.getElementById('question-text').innerText=currentQ.questionText;
 
     document.getElementById('choice1').innerText=currentQ.choices[0];
@@ -197,3 +211,4 @@ function displayQuestion(){
     document.getElementById('progress').style.width=progress+"%";
     //document.getElementById('feedback').innerText="";
 }
+
