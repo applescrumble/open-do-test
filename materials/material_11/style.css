@@ -1,170 +1,142 @@
-:root {
-    --bg-color: #f0e6d1;
-    /* 文字ごとの色定義 */
-    --color-a: #e5962c; --color-b: #346db9; --color-c: #346db9;
-    --color-d: #346db9; --color-e: #346db9; --color-f: #e61019;
-    --color-g: #346db9; --color-h: #e5962c; --color-i: #fddf08;
-    --color-j: #e5962c; --color-k: #e5962c; --color-l: #e61019;
-    --color-m: #e61019; --color-n: #e61019; --color-o: #c19e43;
-    --color-p: #346db9; --color-q: #ee77a5; --color-r: #c19e43;
-    --color-s: #e61019; --color-t: #346db9; --color-u: #ee77a5;
-    --color-v: #346db9; --color-w: #ee77a5; --color-x: #e61019;
-    --color-y: #fddf08; --color-z: #346db9;
-    /* ... 他の文字も同様に追加可能 ... */
+/* 全体の設定 */
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background-color: #f0f9ff; /* 優しい水色 */
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: "Arial Rounded MT Bold";
-    justify-content: center; }
-
+/* コンテナ（カード風） */
 #app-container {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(6, 1fr);
-    height: 100vh;
-    background-color: var(--bg-color);
-    position: relative;
-
-    padding: 20px;
-    box-sizing: border-box;
-    gap:10px;
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
 }
 
-/* 中央のキャンバス */
-#main-canvas {
-    grid-column: 2 / 10;
-    grid-row: 2 / 5;
-    background-color: rgba(255, 255, 255, 0.4);
-    border-radius: 30px;
-    position: relative;
-    z-index: 1;
+/* タイトルと文字 */
+h1 { color: #ff8c00; font-size: 2rem; }
+h2 { color: #4a90e2; }
+p { font-size: 1.5rem; font-weight: bold; }
+
+/* ボタンのデザイン */
+button {
+  background-color: #ffaa00;
+  border: none;
+  border-bottom: 5px solid #cc8800; /* 立体感 */
+  border-radius: 15px;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.1s;
+  width: 80%;
 }
 
-/* カードの基本 */
-.card {
-    width: 70px;
-    height: 90px;
-    margin: auto;
-    background: white;
-    border: 2px solid #333;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 2.5rem;
-    font-weight: 900;
-    cursor: grab;
-    user-select: none;
-    box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
-    transition: transform 0.1s;
+button:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid #cc8800;
 }
 
-/* ストック内のカード配置用 */
-#stock-grid {
-    display: contents; /* 親のグリッドに直接参加 */
+button:hover {
+  background-color: #ffbc33;
 }
 
-/* キャンバス上のカード（絶対配置） */
-.on-canvas {
-    position: absolute;
-    z-index: 100;
-    touch-action: none;
+/* 選択肢ボタン（横並び） */
+#choices {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
 }
 
-/* 色付きモードの適用 */
-.card.is-colored.letter-a { color: var(--color-a); }
-.card.is-colored.letter-b { color: var(--color-b); }
-.card.is-colored.letter-c { color: var(--color-c); }
-.card.is-colored.letter-d { color: var(--color-d); }
-.card.is-colored.letter-e { color: var(--color-e); }
-.card.is-colored.letter-f { color: var(--color-f); }
-.card.is-colored.letter-g { color: var(--color-g); }
-.card.is-colored.letter-h { color: var(--color-h); }
-.card.is-colored.letter-i { color: var(--color-i); }
-.card.is-colored.letter-j { color: var(--color-j); }
-.card.is-colored.letter-k { color: var(--color-k); }
-.card.is-colored.letter-l { color: var(--color-l); }
-.card.is-colored.letter-m { color: var(--color-m); }
-.card.is-colored.letter-n { color: var(--color-n); }
-.card.is-colored.letter-o { color: var(--color-o); }
-.card.is-colored.letter-p { color: var(--color-p); }
-.card.is-colored.letter-q { color: var(--color-q); }
-.card.is-colored.letter-r { color: var(--color-r); }
-.card.is-colored.letter-s { color: var(--color-s); }
-.card.is-colored.letter-t { color: var(--color-t); }
-.card.is-colored.letter-u { color: var(--color-u); }
-.card.is-colored.letter-v { color: var(--color-v); }
-.card.is-colored.letter-w { color: var(--color-w); }
-.card.is-colored.letter-x { color: var(--color-x); }
-.card.is-colored.letter-y { color: var(--color-y); }
-.card.is-colored.letter-z { color: var(--color-z); }
-
-/* 必要に応じて z まで追加 */
-
-#toolbar {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #333;
-    padding: 10px 20px;
-    border-radius: 50px;
-    display: flex;
-    gap: 15px;
-    z-index: 1000;
+#choices button {
+  width: 45%;
+  font-size: 2rem;
+  background-color: #4caf50;
+  border-bottom: 5px solid #388e3c;
 }
-
-#toolbar button {
-    padding: 8px 15px;
-    cursor: pointer;
-    border-radius: 20px;
-    border: none;
-    font-weight: bold;
-    position: relative;
+#choices button:hover {
+  background-color: #69b46b; /* ホバー時の色も設定できる */
 }
 
 
-/* ツールチップの本体（共通設定） */
-#toolbar button.has-tooltip::after {
-    content: attr(data-tooltip); /* data-tooltipの中身を表示 */
-    position: absolute;
-    bottom: 170%; /* ボタンの少し上に配置 */
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #333;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    white-space: nowrap; /* 改行させない */
-    opacity: 0; /* 最初は透明 */
-    visibility: hidden;
-    transition: opacity 0.3s; /* ふわっと出す */
-    pointer-events: none; /* 説明文が操作の邪魔をしないように */
-    z-index: 2000;
-
+/* 結果リスト */
+#wrong-answers-list {
+  text-align: left;
+  background: #fff0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
 }
 
-/* マウスが乗った時だけ表示 */
-#toolbar button:hover::after {
-    opacity: 1;
-    visibility: visible;
+#feedback {
+  /* 文字2つ分くらいの高さを確保しておく */
+  height: 2.5rem; 
+  line-height: 2.5rem;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* 枠が見えないようにしておけば、文字が出た時だけ目立ちます */
 }
 
-/* 吹き出しの三角（お好みで） 
-#toolbar button::before {
-    content: "";
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%);
-    border: 5px solid transparent;
-    border-top-color: #333;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s;
-}*/
 
-#toolbar button:hover::before {
-    opacity: 1;
-    visibility: visible;
+.num-btn.selected {
+  background-color: #ff4500 !important;
+  border-bottom: 5px solid #b33000 !important;
+  transform: translateY(2px);
+}
+
+#number-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%; /* 親要素に合わせる */
+  max-width: 300px; /* 広がりすぎ防止 */
+  margin: 20px auto;
+}
+
+.num-btn {
+  width: 100%; /* グリッドの幅に合わせる */
+  aspect-ratio: 1 / 1; /* 正方形を維持 */
+  margin: 0; /* grid内ではmargin不要 */
+  font-size: 30px;
+}
+
+/* 紫色のボタン用の設定 */
+.btn-purple {
+  background-color: #9c27b0;
+  border-bottom-color: #7b1fa2;
+}
+
+.btn-purple:hover {
+  background-color: #ba68c8; /* ホバー時の色も設定できる */
+}
+
+/* けってい！ボタン用の設定（例） */
+.btn-orange {
+  background-color: #ff4500;
+  border-bottom-color: #b33000;
+}
+
+.btn-orange:hover {
+  background-color: #ff6f3b; /* ホバー時の色も設定できる */
+}
+
+/* もどるボタン用の設定（例） */
+.btn-gray {
+  background-color: #666;
+  border-bottom-color: #444;
+}
+
+.btn-gray:hover {
+  background-color: #838383; /* ホバー時の色も設定できる */
 }

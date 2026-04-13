@@ -1,123 +1,217 @@
-let alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
-const stockGrid = document.getElementById('stock-grid');
-const mainCanvas = document.getElementById('main-canvas');
-let currentZIndex = 100;
-let isColorMode=false;
-let isUpperMode=false;
+//状態を管理する変数
+let currentMode="";
+let questionCount=0;
+let correctCount=0;
+let wrongAnswers=[];
+let quizSet=[];
+let isFirstTry=true;
+let selectedBs=[];
 
-// 初期化：外周にカードを並べる
-function initStock() {
-    stockGrid.innerHTML = '';
-    // 外周のセル番号を定義（10x6のグリッドの外周）
-    const peripheralIndices = getPeripheralIndices(10, 5);
+//画面を切り替える共通関数
+function showScreen(screenId){
+    //すべての画面を一度隠す
+    document.getElementById('screen-start').style.display='none';
+    document.getElementById('screen-custom').style.display='none';
+    document.getElementById('screen-quiz').style.display='none';
+    document.getElementById('screen-result').style.display='none';
+
+    //指定された画面だけ表示する
+    document.getElementById(screenId).style.display='block';
+}
+
+function goToCustomConfig() {
+  // 選んでいた数字を一度リセットしたい場合はここで空にする
+  selectedBs = [];
+  
+  // 全ボタンのスタイルを元に戻す（もしクラスで管理しているならクラスを外す）
+  const btns = document.querySelectorAll('.num-btn');
+  btns.forEach(btn => btn.classList.remove('selected'));
+
+  // カスタム設定画面を表示
+  showScreen('screen-custom');
+}
+
+function toggleNumber(num){
+    const index=selectedBs.indexOf(num);
+    const btn=document.querySelectorAll('.num-btn')[num-1];//対応するボタン
+
+    if(index===-1){
+        selectedBs.push(num);
+        btn.classList.add('selected');
+        btn.style.backgroundColor="#ff4500";
+    }else{
+        selectedBs.splice(index, 1);
+        btn.classList.remove('selected');
+        btn.style.backgroundColor="";
+    }
+}
+
+function startCustomQuiz(){
+    if(selectedBs.length===0){
+        alert("数字をひとつ以上えらんでね！");
+        return;
+    }
+    currentMode='custom';
+    questionCount=1;
+    correctCount=0;
+    wrongAnswers=[];
+
+    createQuizSet('custom');
+    displayQuestion();
+    showScreen('screen-quiz');
+}
+
+//各イベントごとの処理
+function startQuiz(mode){
+    currentMode=mode;
+    questionCount=1;
+    correctCount=0;
+    wrongAnswers=[];
+
+    //クイズ画面へ切り替え
+    createQuizSet(mode);
+    displayQuestion();
+    showScreen('screen-quiz');
+}
+
+function checkAnswer(choiceIndex){
     
-    alphabet.forEach((char, i) => {
-        const card = createCard(char);
-        const pos = peripheralIndices[i];
-        if (pos) {
-            card.style.gridColumn = pos.col;
-            card.style.gridRow = pos.row;
-            stockGrid.appendChild(card);
+    const currentQ=quizSet[questionCount-1];
+    const selectedAnswer=currentQ.choices[choiceIndex];
+
+    if(selectedAnswer===currentQ.answer){
+        document.getElementById('feedback').innerText="せいかい！";
+        if(isFirstTry){
+            correctCount++;
         }
-    });
-}
-
-function createCard(char) {
-    const div = document.createElement('div');
-    div.className = `card letter-${char.toLowerCase()}`;
-    if(isColorMode)div.classList.add("is-colored");
-    div.textContent = isUpperMode ? char.toUpperCase() : char. toLowerCase();
-    div.onmousedown = (e) => startDrag(e, div);
-    return div;
-}
-
-// ドラッグ処理の核心
-function startDrag(e, card) {
-    let target = card;
-
-    // ストックから触った場合は複製
-    if (!card.classList.contains('on-canvas')) {
-        const rect = card.getBoundingClientRect();
-        target = card.cloneNode(true);
-        target.classList.add('on-canvas');
-        
-        // 複製した瞬間にダブルクリック削除機能を付与
-        target.ondblclick = () => target.remove();
-        
-        // 元の場所と同じ位置に配置
-        target.style.left = rect.left + 'px';
-        target.style.top = rect.top + 'px';
-        document.body.appendChild(target); 
-
-        target.onmousedown=(event)=>startDrag(event, target);
-    }
-
-    // 重なり順を一番上にする
-    target.style.zIndex = ++currentZIndex;
-
-    // マウス移動時の処理
+        document.getElementById('choice1').disabled = true;
+        document.getElementById('choice2').disabled = true;
+        setTimeout(()=>{
+            document.getElementById('choice1').disabled = false;
+            document.getElementById('choice2').disabled = false;
+        if(questionCount<10){
+            questionCount++;
+            displayQuestion();
+        }else{
+            showResult();
+        }
+        }, 1000);
+    }else{
+        isFirstTry = false;
+    document.getElementById('feedback').innerText = "ざんねん！もう一回考えてみてね。";
     
-    const shiftX = e.clientX - target.getBoundingClientRect().left;
-    const shiftY = e.clientY - target.getBoundingClientRect().top;
+    // 1. まず、保存したい「完成した文字」を作る
+    const textToStore = currentQ.questionText + "(答え：" + currentQ.answer + ")";
+    
+    // 2. その「完成した文字」がリストにあるかチェックする
+    if (!wrongAnswers.includes(textToStore)) {
+        wrongAnswers.push(textToStore);
+    }
+    }
+}
 
-    function moveAt(pageX, pageY) {
-        target.style.left = pageX - shiftX + 'px';
-        target.style.top = pageY - shiftY + 'px';
+function showResult(){
+    document.getElementById('result-score').innerText=`10もん中 ${correctCount}もん　せいかい！`
+    
+    const resultImg=document.getElementById('result-image');
+    if (correctCount === 10) {
+        resultImg.src = 'score_10.png'; // 満点の画像
+    } else if (correctCount >= 7) {
+        resultImg.src = 'score_good.png'; // 7-9点の画像
+    } else {
+        resultImg.src = 'score_fight.png'; // 6点以下の画像
     }
 
-    function onMouseMove(event) {
-        moveAt(event.pageX, event.pageY);
+    const listContainer=document.getElementById('wrong-answers-list');
+    listContainer.innerHTML="";
+
+    if(wrongAnswers.length===0){
+        listContainer.innerHTML="<p>ぜんぶ　いっかいで　せいかい！<br>すごすぎる！</p>";
+    }else{
+        const ul=document.createElement('ul');
+        wrongAnswers.forEach(item=>{
+            const li=document.createElement('li');
+            li.innerText=item;
+            ul.appendChild(li);
+        });
+        listContainer.appendChild(ul);
     }
+    showScreen('screen-result');
+}
 
-    document.addEventListener('mousemove', onMouseMove);
+function backToStart(){
+    selectedBs=[];
+    const btns=document.querySelectorAll('.num-btn');
+    btns.forEach(btn=>btn.style.backgroundColor="");
+    showScreen('screen-start');
+}
 
-    document.onmouseup = function() {
-        document.removeEventListener('mousemove', onMouseMove);
-        document.onmouseup = null;
+function generateQuestion(mode){
+    
+    let B;
+
+    if(mode==='custom'){
+        const randomIndex=Math.floor(Math.random()*selectedBs.length);
+        B=selectedBs[randomIndex];
+    }else{
+        let minB, maxB;
+        if(mode==='easy'){minB=1; maxB=3;}
+        else if(mode==='normal'){minB=4; maxB=6;}
+        else{minB=7;maxB=9;}
+    B=Math.floor(Math.random()*(maxB-minB+1))+minB;
+}
+    const A=Math.floor(Math.random()*(B*10));//0~(B*10-1)
+    const C=Math.floor(A/B);
+    const D=A%B;
+
+    let wrongChoice;
+    if(B===1){
+        wrongChoice=1;
+    }else{
+        do{
+            wrongChoice=Math.floor(Math.random()*B);//0~(B-1)
+        }while(wrongChoice===D);
+    }
+    const choices=[D, wrongChoice].sort(()=>Math.random()-0.5);
+
+    return{
+        questionText: `${A} ÷ ${B} = ${C} あまり ?`,
+        answer: D,
+        choices: choices
     };
-    target.ondragstart=function(){return false};;
 }
 
-// 外周の座標を計算するユーティリティ
-function getPeripheralIndices(cols, rows) {
-    let indices = [];
-    for(let c=1; c<=cols; c++) indices.push({col: c, row: 1}); // 上
-    for(let r=2; r<=rows; r++) indices.push({col: cols, row: r}); // 右
-    for(let c=cols-1; c>=1; c--) indices.push({col: c, row: rows}); // 下
-    for(let r=rows-1; r>=2; r--) indices.push({col: 1, row: r}); // 左
-    return indices;
+
+function createQuizSet(mode){
+    quizSet=[];
+    while(quizSet.length<10){
+        const newQ=generateQuestion(mode);
+        const isDuplicate=quizSet.some(q=>q.questionText===newQ.questionText);
+        if(!isDuplicate){
+            quizSet.push(newQ);
+        }
+    }
 }
 
-// ツールバー機能
-function toggleCase() {
-    isUpperMode=!isUpperMode;
-    const cards = document.querySelectorAll('#stock-grid .card');
-    cards.forEach(c => {
-        //const isUpper = c.textContent === c.textContent.toUpperCase();
-        c.textContent = isUpperMode ? c.textContent.toUpperCase() : c.textContent.toLowerCase();
-    });
+function displayQuestion(){
+    isFirstTry=true;
+
+    document.getElementById('feedback').innerText="";
+
+    if(questionCount>10) return;
+
+    const currentQ=quizSet[questionCount-1];
+
+    if(currentQ){
+    document.getElementById('question-number').innerText=`だい ${questionCount} もん`
+    document.getElementById('question-text').innerText=currentQ.questionText;
+
+    document.getElementById('choice1').innerText=currentQ.choices[0];
+    document.getElementById('choice2').innerText=currentQ.choices[1];
+    }
+
+    const progress=(questionCount/10)*100;
+    document.getElementById('progress').style.width=progress+"%";
+    //document.getElementById('feedback').innerText="";
 }
 
-function toggleColor() {
-    isColorMode=!isColorMode;
-    const cards = document.querySelectorAll('#stock-grid .card');
-    cards.forEach(c => {
-        if(isColorMode)c.classList.add("is-colored");
-        else c.classList.toggle('is-colored');
-});
-}
-
-function shuffleStock() {
-    alphabet.sort(() => Math.random() - 0.5);
-    initStock();
-}
-function orderStock(){
-    alphabet.sort();
-    initStock();
-}
-
-function resetCanvas() {
-    document.querySelectorAll('.on-canvas').forEach(c => c.remove());
-}
-
-initStock();
