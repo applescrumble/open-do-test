@@ -44,7 +44,7 @@ button {
 
 button:active {
   transform: translateY(3px);
-  border-bottom: 2px solid #cc8800;
+  border-bottom: 2px solid;
 }
 
 button:hover {

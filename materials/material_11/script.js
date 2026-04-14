@@ -101,7 +101,7 @@ function checkAnswer(choiceIndex){
     document.getElementById('feedback').innerText = "ざんねん！もう一回考えてみてね。";
     
     // 1. まず、保存したい「完成した文字」を作る
-    const textToStore = currentQ.questionText + "(答え：" + currentQ.answer + ")";
+    const textToStore = currentQ.questionText + "（答え：" + currentQ.answer + "）";
     
     // 2. その「完成した文字」がリストにあるかチェックする
     if (!wrongAnswers.includes(textToStore)) {

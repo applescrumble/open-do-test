@@ -10,10 +10,10 @@
     <div id="app-container">
     <div id="screen-start">
         <h1>「あまり」をあてよう！</h1>
-        <button onclick="startQuiz('easy')">１・２・３のだん</button>
-        <button onclick="startQuiz('normal')">４・５・６のだん</button>
-        <button onclick="startQuiz('hard')">７・８・９のだん</button>
-        <button class="btn-purple" onclick="goToCustomConfig()">こまかく　えらぶ</button>
+        <button onclick="startQuiz('easy')" class="btn-easy">１・２・３のだん</button>
+        <button onclick="startQuiz('normal')" class="btn-normal">４・５・６のだん</button>
+        <button onclick="startQuiz('hard')" class="btn-hard">７・８・９のだん</button>
+        <button class="btn-custom" onclick="goToCustomConfig()">こまかく　えらぶ</button>
     </div>
     <div id="screen-custom" style="display: none;">
         <h2>わる数を　えらんでね</h2>
@@ -28,8 +28,8 @@
             <button class="num-btn" onclick="toggleNumber(8)">8</button>
             <button class="num-btn" onclick="toggleNumber(9)">9</button>
         </div>
-        <button class="btn-orange" id="start-custom-btn" onclick="startCustomQuiz()">けってい！</button>
-        <button class="btn-gray" onclick="backToStart()">もどる</button>
+        <button class="btn-decide" id="start-custom-btn" onclick="startCustomQuiz()">けってい！</button>
+        <button class="btn-back" onclick="backToStart()">もどる</button>
     </div>
 
     <div id="screen-quiz" style="display: none;">
@@ -41,7 +41,7 @@
         </div>
         <p id="feedback"></p>
         <div style="background:#eee; border-radius:10px; height:10px;">
-  <div id="progress" style="background:#4caf50; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
+  <div id="progress" style="background:#4782ff; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
 </div>
     </div>
 

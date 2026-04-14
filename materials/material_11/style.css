@@ -1,7 +1,7 @@
 /* 全体の設定 */
 body {
   font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-  background-color: #f0f9ff; /* 優しい水色 */
+  background-color: #f0fff6;
   color: #333;
   display: flex;
   justify-content: center;
@@ -29,8 +29,9 @@ p { font-size: 1.5rem; font-weight: bold; }
 /* ボタンのデザイン */
 button {
   background-color: #ffaa00;
+ 
   border: none;
-  border-bottom: 5px solid #cc8800; /* 立体感 */
+  border-bottom: 5px solid #cc8800;; /* 立体感 */
   border-radius: 15px;
   color: white;
   padding: 15px 30px;
@@ -41,7 +42,23 @@ button {
   transition: 0.1s;
   width: 80%;
 }
-
+/*
+.btn-easy{
+ background-color: #fedbdf; 
+ border-bottom: 5px solid #deafb5;
+ color: #fd5e4b;
+}
+.btn-normal{
+  background-color: #fd8391;
+  border-bottom: 5px solid #d95d6b;
+  color: #fddf98;
+}
+.btn-hard{
+  background-color: #fd5e4b;
+  border-bottom: 5px solid #de3c2a;
+  color: #fedbdf;
+}
+*/
 button:active {
   transform: translateY(3px);
   border-bottom: 2px solid #cc8800;
@@ -112,31 +129,40 @@ button:hover {
 }
 
 /* 紫色のボタン用の設定 */
-.btn-purple {
+.btn-custom {
   background-color: #9c27b0;
   border-bottom-color: #7b1fa2;
 }
-
-.btn-purple:hover {
+.btn-custom:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid #7b1fa2;
+}
+.btn-custom:hover {
   background-color: #ba68c8; /* ホバー時の色も設定できる */
 }
 
 /* けってい！ボタン用の設定（例） */
-.btn-orange {
+.btn-decide {
   background-color: #ff4500;
   border-bottom-color: #b33000;
 }
-
-.btn-orange:hover {
+.btn-decide:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid b33000;
+}
+.btn-decide:hover {
   background-color: #ff6f3b; /* ホバー時の色も設定できる */
 }
 
 /* もどるボタン用の設定（例） */
-.btn-gray {
+.btn-back {
   background-color: #666;
   border-bottom-color: #444;
 }
-
-.btn-gray:hover {
+.btn-back:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid #444;
+}
+.btn-back:hover {
   background-color: #838383; /* ホバー時の色も設定できる */
 }
