@@ -58,6 +58,12 @@ export const appList = [
     desc: "",
     link: "materials/material_10",
     image: "materials/material_10/thumb.webp"
+  },
+  { 
+    title: "「あまり」をあてよう！", 
+    desc: "",
+    link: "materials/material_11",
+    image: "materials/material_11/thumb.webp"
   }
 ];
 /*
