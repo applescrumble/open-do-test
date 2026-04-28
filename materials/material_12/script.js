@@ -166,3 +166,12 @@ function showResult() {
 function backToStart() {
     showScreen('screen-start');
 }
+
+// 入力欄でキーが押された時の処理
+numInput.addEventListener('keydown', (e) => {
+    // 押されたキーが "Enter" だった場合
+    if (e.key === 'Enter') {
+        // 回答ボタンを代わりにクリックしたことにする
+        ansBtn.click();
+    }
+});

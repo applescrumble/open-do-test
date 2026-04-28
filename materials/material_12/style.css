@@ -42,23 +42,7 @@ button {
   transition: 0.1s;
   width: 80%;
 }
-/*
-.btn-easy{
- background-color: #fedbdf; 
- border-bottom: 5px solid #deafb5;
- color: #fd5e4b;
-}
-.btn-normal{
-  background-color: #fd8391;
-  border-bottom: 5px solid #d95d6b;
-  color: #fddf98;
-}
-.btn-hard{
-  background-color: #fd5e4b;
-  border-bottom: 5px solid #de3c2a;
-  color: #fedbdf;
-}
-*/
+
 button:active {
   transform: translateY(3px);
   border-bottom: 2px solid #cc8800;
@@ -68,20 +52,18 @@ button:hover {
   background-color: #ffbc33;
 }
 
-/* 選択肢ボタン（横並び） */
-#choices {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-}
 
-#choices button {
-  width: 45%;
-  font-size: 2rem;
+
+#ansBtn {
+  width: auto;
+  font-size: 120px;
+  padding: 10px 25px;
+  font-size: 1.2rem;
   background-color: #4caf50;
   border-bottom: 5px solid #388e3c;
+  margin: 0;
 }
-#choices button:hover {
+#ansBtn:hover {
   background-color: #69b46b; /* ホバー時の色も設定できる */
 }
 
@@ -106,11 +88,6 @@ button:hover {
 }
 
 
-.num-btn.selected {
-  background-color: #ff4500 !important;
-  border-bottom: 5px solid #b33000 !important;
-  transform: translateY(2px);
-}
 
 #number-selector {
   display: grid;
@@ -128,41 +105,54 @@ button:hover {
   font-size: 30px;
 }
 
-/* 紫色のボタン用の設定 */
-.btn-custom {
-  background-color: #9c27b0;
-  border-bottom-color: #7b1fa2;
-}
-.btn-custom:active {
-  transform: translateY(3px);
-  border-bottom: 2px solid #7b1fa2;
-}
-.btn-custom:hover {
-  background-color: #ba68c8; /* ホバー時の色も設定できる */
-}
-
-/* けってい！ボタン用の設定（例） */
-.btn-decide {
-  background-color: #ff4500;
-  border-bottom-color: #b33000;
-}
-.btn-decide:active {
-  transform: translateY(3px);
-  border-bottom: 2px solid b33000;
-}
-.btn-decide:hover {
-  background-color: #ff6f3b; /* ホバー時の色も設定できる */
+/* --- 入力欄全体のスタイル --- */
+#numInput {
+    font-size: 24px;
+    padding: 12px;
+    width: 200px;
+    /* 枠線を薄いオレンジ系に（#cccから変更） */
+    border: 2px solid #92c694; 
+    border-radius: 12px;      /* 他のボタンの角丸(15px)に合わせて少し丸く */
+    text-align: center;
+    outline: none;
+    transition: all 0.3s;
+    appearance: none;
+    background-color: rgb(249, 255, 247); /* ほんのりクリーム色で目に優しく */
 }
 
-/* もどるボタン用の設定（例） */
-.btn-back {
-  background-color: #666;
-  border-bottom-color: #444;
+/* --- 入力欄をクリック（フォーカス）した時 --- */
+#numInput:focus {
+    /* 青系からメインのオレンジ系に変更 */
+    border-color: #4caf50;   
+    box-shadow: 0 0 10px rgba(51, 255, 0, 0.4); 
+    background-color: #ffffff; /* 入力中は白にする */
 }
-.btn-back:active {
-  transform: translateY(3px);
-  border-bottom: 2px solid #444;
+
+/* プログレスバー（進行状況）の色も揃える */
+#progress {
+    /* 青（#4782ff）を使っているなら、ここもオレンジ系かグリーンに！ */
+    background: linear-gradient(to right, #388e3c, #4caf50) !important;
+    width:0%; 
+    height:100%; 
+    border-radius:10px; 
+    transition:0.3s;
 }
-.btn-back:hover {
-  background-color: #838383; /* ホバー時の色も設定できる */
+
+/* --- フィードバックの文字色 --- */
+#feedback {
+    height: 2.5rem; 
+    line-height: 2.5rem;
+    margin: 10px 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    /* 色はJS側で指定されていますが、デフォルトを少し柔らかい色に */
+    color: #555;
+}
+
+.quiz-input-area{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
 }

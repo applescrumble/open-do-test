@@ -10,17 +10,19 @@
     <div id="app-container">
         <div id="screen-start">
             <h1>大きな数</h1>
-            <button onclick="startQuiz('kanji-to-num')" class="btn-ktn">漢数字→数字</button>
+            <button onclick="startQuiz('kanji-to-num')" class="btn-ktn">漢数字（百二十三）→算用数字（123）</button>
         </div>
 
         <div id="screen-quiz" style="display: none;">
             <h2 id="question-number">だい　１　もん</h2>
             <p id="question-text">ここに問題がでます</p>
+            <div class="quiz-input-area">
             <input type="number" id="numInput" placeholder="答えを書いてね">
-            <button id="ansBtn">回答</button>
+            <br><button id="ansBtn">回答</button>
+            </div>
             <p id="feedback"></p>
             <div style="background:#eee; border-radius:10px; height:10px;">
-                <div id="progress" style="background:#4782ff; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
+                <div id="progress"></div>
             </div>
         </div>
 
