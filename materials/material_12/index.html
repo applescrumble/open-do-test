@@ -8,36 +8,35 @@
 </head>
 <body>
     <div id="app-container">
-    <div id="screen-start">
-        <h1>大きな数</h1>
-        <button onclick="startQuiz('kanji-to-num')" class="btn-ktn">漢数字→数字</button>
-        
-    </div>
-
-    <div id="screen-quiz" style="display: none;">
-        <h2 id="question-number">だい　１　もん</h2>
-        <p id="question-text">ここに問題がでます</p>
-        <input type="number" id="numInput" placeholder="答えを書いてね">
-        <button id="ansBtn">回答</button>
-        <p id="feedback"></p>
-        <div style="background:#eee; border-radius:10px; height:10px;">
-  <div id="progress" style="background:#4782ff; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
-</div>
-    </div>
-
-    <div id="screen-result" style="display: none;">
-        <h1>よくがんばったね！</h1>
-        <div id="result-illustration">
-            <img id="result-image" src="" alt="結果のイラスト" style="max-width: 500px; height:auto;">
+        <div id="screen-start">
+            <h1>大きな数</h1>
+            <button onclick="startQuiz('kanji-to-num')" class="btn-ktn">漢数字→数字</button>
         </div>
-        <p id="result-score"></p>
-        <h2>【ふくしゅう】まちがえた　もんだい</h2>
-        <div id="wrong-answers-list"></div>
-        <button onclick="backToStart()">はじめに　もどる</button>
+
+        <div id="screen-quiz" style="display: none;">
+            <h2 id="question-number">だい　１　もん</h2>
+            <p id="question-text">ここに問題がでます</p>
+            <input type="number" id="numInput" placeholder="答えを書いてね">
+            <button id="ansBtn">回答</button>
+            <p id="feedback"></p>
+            <div style="background:#eee; border-radius:10px; height:10px;">
+                <div id="progress" style="background:#4782ff; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
+            </div>
+        </div>
+
+        <div id="screen-result" style="display: none;">
+            <h1>よくがんばったね！</h1>
+            <div id="result-illustration">
+                <img id="result-image" src="" alt="結果のイラスト" style="max-width: 500px; height:auto;">
+            </div>
+            <p id="result-score"></p>
+            <h2>【ふくしゅう】まちがえた　もんだい</h2>
+            <div id="wrong-answers-list"></div>
+            <button onclick="backToStart()">はじめに　もどる</button>
+        </div>
     </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/@geolonia/japanese-numeral@0.1.18/dist/japanese-numeral.min.js"></script>
-    <script src="script.js"></script>
+
+    
     <script src="script.js"></script>
 </body>
 </html>
