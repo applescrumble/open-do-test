@@ -66,7 +66,7 @@ function showScreen(screenId) {
 function createQuizSet() {
     quizSet = [];
     const shuffled = [...targetNumbers].sort(() => Math.random() - 0.5);
-    const maxQuestions = Math.min(shuffled.length, 10);
+    const maxQuestions = Math.min(shuffled.length, 5);
     
     for (let i = 0; i < maxQuestions; i++) {
         const num = shuffled[i];
@@ -114,7 +114,7 @@ ansBtn.addEventListener('click', () => {
 
     if (userAnswer === currentQ.answer) {
         feedback.innerText = "せいかい！";
-        feedback.style.color = "blue";
+        //feedback.style.color = "blue";
         if (isFirstTry) correctCount++;
 
         setTimeout(() => {
@@ -128,7 +128,7 @@ ansBtn.addEventListener('click', () => {
     } else {
         isFirstTry = false;
         feedback.innerText = "ざんねん！もう一回考えてみてね。";
-        feedback.style.color = "red";
+        //feedback.style.color = "red";
         
         const textToStore = `${currentQ.questionText}（答え：${currentQ.answer}）`;
         if (!wrongAnswers.includes(textToStore)) {
