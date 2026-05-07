@@ -143,6 +143,13 @@ function showResult() {
     const resultImg = document.getElementById('result-image');
     const scoreRate = correctCount / quizSet.length;
     
+    if (correctCount === 5) {
+        resultImg.src = 'score_10.png'; // 満点の画像
+    } else if (correctCount >= 3) {
+        resultImg.src = 'score_good.png'; // 7-9点の画像
+    } else {
+        resultImg.src = 'score_fight.png'; // 6点以下の画像
+    }
     // 画像がない場合でもエラーにならないように配慮
     if (scoreRate === 1) {
         resultImg.alt = "満点！おめでとう！";
@@ -164,6 +171,7 @@ function showResult() {
     }
     showScreen('screen-result');
 }
+
 
 function backToStart() {
     showScreen('screen-start');
