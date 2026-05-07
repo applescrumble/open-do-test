@@ -153,11 +153,14 @@ function showResult() {
     const scoreRate = correctCount / quizSet.length;
     
     if (correctCount === 5) {
-        resultImg.src = 'score_10.png'; // 満点の画像
+        resultImg.src = 'level3.webp';
+        document.getElementById('result-comment').innerText = `今日の売れ行き：やったー！大繁盛！`;
     } else if (correctCount >= 3) {
-        resultImg.src = 'score_good.png'; // 7-9点の画像
+        resultImg.src = 'level2.webp';
+        document.getElementById('result-comment').innerText = `今日の売れ行き：いい感じ！`;
     } else {
-        resultImg.src = 'score_fight.png'; // 6点以下の画像
+        resultImg.src = 'level1.webp';
+        document.getElementById('result-comment').innerText = `今日の売れ行き：全然売れなかった…`;
     }
     // 画像がない場合でもエラーにならないように配慮
     if (scoreRate === 1) {
@@ -194,3 +197,21 @@ numInput.addEventListener('keydown', (e) => {
         ansBtn.click();
     }
 });
+
+dummyInput.addEventListener('input', (e) => {
+    // 1. いったんスペースをすべて消して数字だけにする
+    let value = e.target.value.replace(/\s+/g, '');
+
+    // 2. 右から4桁ごとにスペースを入れる
+    // 正規表現を使って、後ろから4桁のまとまりを見つけてスペースを差し込む
+    let formattedValue = value.replace(/(\d)(?=(\d{4})+$)/g, '$1 ');
+
+    // 3. 入力欄に反映させる
+    e.target.value = formattedValue;
+
+    if(value==16009503){
+        document.getElementById('dummyFeedback').innerText="正解！"
+    }
+    
+});
+

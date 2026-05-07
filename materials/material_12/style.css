@@ -1,7 +1,7 @@
 /* 全体の設定 */
 body {
   font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
-  background-color: #f0fff6;
+  background-color: #fffaf0;
   color: #333;
   display: flex;
   justify-content: center;
@@ -22,7 +22,7 @@ body {
 }
 
 /* タイトルと文字 */
-h1 { color: #ff8c00; font-size: 2rem; }
+h1 { color: #ffaa00; font-size: 2rem; }
 h2 { color: #4a90e2; }
 p { font-size: 1.5rem; font-weight: bold; }
 
@@ -89,24 +89,10 @@ button:hover {
 
 
 
-#number-selector {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  width: 100%; /* 親要素に合わせる */
-  max-width: 300px; /* 広がりすぎ防止 */
-  margin: 20px auto;
-}
-
-.num-btn {
-  width: 100%; /* グリッドの幅に合わせる */
-  aspect-ratio: 1 / 1; /* 正方形を維持 */
-  margin: 0; /* grid内ではmargin不要 */
-  font-size: 30px;
-}
 
 /* --- 入力欄全体のスタイル --- */
 #numInput {
+    
     font-size: 24px;
     padding: 12px;
     width: 200px;
@@ -142,7 +128,7 @@ button:hover {
 #feedback {
     height: 2.5rem; 
     line-height: 2.5rem;
-    margin: 10px 0;
+    margin: 20px 0;
     font-size: 1.5rem;
     font-weight: bold;
     /* 色はJS側で指定されていますが、デフォルトを少し柔らかい色に */
@@ -153,6 +139,39 @@ button:hover {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
+  gap: 4px;
   margin-top: 20px;
+}
+
+#result-comment{
+  font-size: 1.5rem;
+  color: #7b4e05;
+  padding: 0%;
+  margin: 0%;
+}
+
+#dummyInput {
+    font-size: 24px;
+    padding: 12px;
+    width: 200px;
+    /* 枠線を薄いオレンジ系に（#cccから変更） */
+    border: 2px solid #92c694; 
+    border-radius: 12px;      /* 他のボタンの角丸(15px)に合わせて少し丸く */
+    text-align: center;
+    outline: none;
+    transition: all 0.3s;
+    appearance: none;
+    background-color: rgb(249, 255, 247); /* ほんのりクリーム色で目に優しく */
+}
+
+/* --- 入力欄をクリック（フォーカス）した時 --- */
+#dummyInput:focus {
+    /* 青系からメインのオレンジ系に変更 */
+    border-color: #4caf50;   
+    box-shadow: 0 0 10px rgba(51, 255, 0, 0.4); 
+    background-color: #ffffff; /* 入力中は白にする */
+}
+
+#dummy{
+  padding: 5px 0 10px;
 }
