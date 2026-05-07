@@ -17,10 +17,7 @@ const targetNumbers = [
     2070092345, 3410000400, 86000531019
 ];
 
-/**
- * 自作の漢数字変換関数
- * ライブラリを使わずに、数字を漢数字（4253 → 四千二百五十三）に変換します
- */
+
 function numberToKanji(num) {
     if (num === 0) return "〇";
     const units = ["", "十", "百", "千"];
@@ -51,6 +48,18 @@ function numberToKanji(num) {
     }
     return res;
 }
+
+numInput.addEventListener('input', (e) => {
+    // 1. いったんスペースをすべて消して数字だけにする
+    let value = e.target.value.replace(/\s+/g, '');
+
+    // 2. 右から4桁ごとにスペースを入れる
+    // 正規表現を使って、後ろから4桁のまとまりを見つけてスペースを差し込む
+    let formattedValue = value.replace(/(\d)(?=(\d{4})+$)/g, '$1 ');
+
+    // 3. 入力欄に反映させる
+    e.target.value = formattedValue;
+});
 
 // --- 画面切り替え ---
 function showScreen(screenId) {
@@ -104,7 +113,7 @@ function displayQuestion() {
 
 // --- 回答チェック ---
 ansBtn.addEventListener('click', () => {
-    const userAnswer = parseInt(numInput.value);
+    const userAnswer = parseInt(numInput.value.replace(/\s+/g, ''), 10);
     const currentQ = quizSet[questionCount - 1];
 
     if (isNaN(userAnswer)) {
