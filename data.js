@@ -64,6 +64,12 @@ export const appList = [
     desc: "",
     link: "materials/material_11",
     image: "materials/material_11/thumb.webp"
+  },
+  { 
+    title: "大きな数", 
+    desc: "",
+    link: "materials/material_12",
+    image: "materials/material_12/thumb.webp"
   }
 ];
 /*
