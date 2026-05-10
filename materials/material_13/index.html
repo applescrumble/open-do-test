@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>「あまり」をあてよう！</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+    <div id="screen-start">
+        <h1>「あまり」をあてよう！</h1>
+        <button onclick="startQuiz('easy')" class="btn-easy">１・２・３のだん</button>
+        <button onclick="startQuiz('normal')" class="btn-normal">４・５・６のだん</button>
+        <button onclick="startQuiz('hard')" class="btn-hard">７・８・９のだん</button>
+        <button class="btn-custom" onclick="goToCustomConfig()">こまかく　えらぶ</button>
+    </div>
+    <div id="screen-custom" style="display: none;">
+        <h2>わる数を　えらんでね</h2>
+        <div id="number-selector">
+            <button class="num-btn" onclick="toggleNumber(1)">1</button>
+            <button class="num-btn" onclick="toggleNumber(2)">2</button>
+            <button class="num-btn" onclick="toggleNumber(3)">3</button>
+            <button class="num-btn" onclick="toggleNumber(4)">4</button>
+            <button class="num-btn" onclick="toggleNumber(5)">5</button>
+            <button class="num-btn" onclick="toggleNumber(6)">6</button>
+            <button class="num-btn" onclick="toggleNumber(7)">7</button>
+            <button class="num-btn" onclick="toggleNumber(8)">8</button>
+            <button class="num-btn" onclick="toggleNumber(9)">9</button>
+        </div>
+        <button class="btn-decide" id="start-custom-btn" onclick="startCustomQuiz()">けってい！</button>
+        <button class="btn-back" onclick="backToStart()">もどる</button>
+    </div>
+
+    <div id="screen-quiz" style="display: none;">
+        <h2 id="question-number">だい　１　もん</h2>
+        <p id="question-text">ここに問題がでます</p>
+        <div id="choices">
+            <button id="choice1" onclick="checkAnswer(0)">たく　１</button>
+            <button id="choice2" onclick="checkAnswer(1)">たく　２</button>
+        </div>
+        <p id="feedback"></p>
+        <div style="background:#eee; border-radius:10px; height:10px;">
+  <div id="progress" style="background:#4782ff; width:0%; height:100%; border-radius:10px; transition:0.3s;"></div>
+</div>
+    </div>
+
+    <div id="screen-result" style="display: none;">
+        <h1>よくがんばったね！</h1>
+        <div id="result-illustration">
+            <img id="result-image" src="" alt="結果のイラスト" style="max-width: 500px; height:auto;">
+        </div>
+        <p id="result-score"></p>
+        <h2>【ふくしゅう】まちがえた　もんだい</h2>
+        <div id="wrong-answers-list"></div>
+        <button onclick="backToStart()">はじめに　もどる</button>
+    </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

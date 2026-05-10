@@ -1,0 +1,168 @@
+/* 全体の設定 */
+body {
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  background-color: #f0fff6;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* コンテナ（カード風） */
+#app-container {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  text-align: center;
+  width: 90%;
+  max-width: 500px;
+}
+
+/* タイトルと文字 */
+h1 { color: #ff8c00; font-size: 2rem; }
+h2 { color: #4a90e2; }
+p { font-size: 1.5rem; font-weight: bold; }
+
+/* ボタンのデザイン */
+button {
+  background-color: #ffaa00;
+ 
+  border: none;
+  border-bottom: 5px solid #cc8800;; /* 立体感 */
+  border-radius: 15px;
+  color: white;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+  transition: 0.1s;
+  width: 80%;
+}
+/*
+.btn-easy{
+ background-color: #fedbdf; 
+ border-bottom: 5px solid #deafb5;
+ color: #fd5e4b;
+}
+.btn-normal{
+  background-color: #fd8391;
+  border-bottom: 5px solid #d95d6b;
+  color: #fddf98;
+}
+.btn-hard{
+  background-color: #fd5e4b;
+  border-bottom: 5px solid #de3c2a;
+  color: #fedbdf;
+}
+*/
+button:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid #cc8800;
+}
+
+button:hover {
+  background-color: #ffbc33;
+}
+
+/* 選択肢ボタン（横並び） */
+#choices {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+#choices button {
+  width: 45%;
+  font-size: 2rem;
+  background-color: #4caf50;
+  border-bottom: 5px solid #388e3c;
+}
+#choices button:hover {
+  background-color: #69b46b; /* ホバー時の色も設定できる */
+}
+
+
+/* 結果リスト */
+#wrong-answers-list {
+  text-align: left;
+  background: #fff0f0;
+  padding: 15px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+#feedback {
+  /* 文字2つ分くらいの高さを確保しておく */
+  height: 2.5rem; 
+  line-height: 2.5rem;
+  margin: 10px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  /* 枠が見えないようにしておけば、文字が出た時だけ目立ちます */
+}
+
+
+.num-btn.selected {
+  background-color: #ff4500 !important;
+  border-bottom: 5px solid #b33000 !important;
+  transform: translateY(2px);
+}
+
+#number-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width: 100%; /* 親要素に合わせる */
+  max-width: 300px; /* 広がりすぎ防止 */
+  margin: 20px auto;
+}
+
+.num-btn {
+  width: 100%; /* グリッドの幅に合わせる */
+  aspect-ratio: 1 / 1; /* 正方形を維持 */
+  margin: 0; /* grid内ではmargin不要 */
+  font-size: 30px;
+}
+
+/* 紫色のボタン用の設定 */
+.btn-custom {
+  background-color: #9c27b0;
+  border-bottom-color: #7b1fa2;
+}
+.btn-custom:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid #7b1fa2;
+}
+.btn-custom:hover {
+  background-color: #ba68c8; /* ホバー時の色も設定できる */
+}
+
+/* けってい！ボタン用の設定（例） */
+.btn-decide {
+  background-color: #ff4500;
+  border-bottom-color: #b33000;
+}
+.btn-decide:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid b33000;
+}
+.btn-decide:hover {
+  background-color: #ff6f3b; /* ホバー時の色も設定できる */
+}
+
+/* もどるボタン用の設定（例） */
+.btn-back {
+  background-color: #666;
+  border-bottom-color: #444;
+}
+.btn-back:active {
+  transform: translateY(3px);
+  border-bottom: 2px solid #444;
+}
+.btn-back:hover {
+  background-color: #838383; /* ホバー時の色も設定できる */
+}
