@@ -8,6 +8,7 @@
 }
 
 .cell{
+    border: 0.1px solid #eee;
     width: 1ch;
     text-align: center;
 }
