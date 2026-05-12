@@ -1,0 +1,13 @@
+#hissan-container{
+    display: grid;
+    grid-template-columns: repeat(10, 1ch);
+
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    line-height: 1.5;
+}
+
+.cell{
+    width: 1ch;
+    text-align: center;
+}
