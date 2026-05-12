@@ -1,6 +1,6 @@
 //a÷b=c...d
-const a = 125;
-const b = 7;
+const a = 502;
+const b = 5;
 let str = a.toString(); //割られる数を文字列に変換
 let sho = 0;
 let amari = 0;
@@ -31,7 +31,7 @@ for (let digit of str) {
 
   target = amari * 10 + value; //このステップにおける「割られる数」
 
-  sho = (target / b) | 0; //商
+  sho = Math.floor(target / b); //商
 
   if (sho !== 0) {
     flag++;
@@ -53,65 +53,37 @@ for (let digit of str) {
 }
 
 //ステップごとに描画していく
-let k=3;
+let k = 3;
 steps.forEach((step, i) => {
   putDigit(2, 3 + i, str[i]); //割られる数
 
-  if(step.flag>1){
-    putDigit(k, 3+i, str[i]);
-    k++;
-  }
-
-  if (step.flag > 0) {
-    putDigit(1, 3 + i, step.sho);
-    
-    if(step.sho>0){
-        let subStr=step.sub.toString();
-        let j=0;
-        for(let subDigit of subStr){
-            let subValue=Number(subDigit);
-            putDigit(k, 3+i-subStr.length+1+j, subValue);
-            j++;
-        }
-        k++;//筆算を１行下にする
-    }
-    putDigit(k, 3+i, step.amari);
-    
-  
-}
-
-});
-
-/*
-steps.forEach((step, i) => {
-
-  if (step.index === 0) {
-    putDigit(2, 3, str[0]);
-  }
-  if (step.index > 0) {
+  if (step.flag>1 && step.index > 0) {//ターゲットを新しく描画（あまりと下ろし）
     let targetStr = step.target.toString();
-
-    for (let j = 0; j < targetStr.length; j++) {
-      putDigit(
-        2 + step.index * 2,
-        3 + step.index - (targetStr.length - 1) + j,
-        targetStr[j],
-      );
+    let m = 0;
+    for (let targetDigit of targetStr) {
+      let targetValue = Number(targetDigit);//なくても良い
+      putDigit(k, 3 + i - targetStr.length + 1 + m, targetValue);
+      m++;
     }
+    k++; //筆算を１行下にする
   }
 
-  putDigit(1, 3 + step.index, step.sho); //商
+  if (step.flag>0) {
+    putDigit(1, 3 + i, step.sho);//商を書く（左側の０以外）
 
-  if (step.sho > 0) {
-    let subStr = step.sub.toString();
-    for (let j = 0; j < subStr.length; j++) {
-      putDigit(
-        3 + step.index * 2,
-        3 + step.index - (subStr.length - 1) + j,
-        subStr[j],
-      ); //引く数
+    if (step.sho > 0) {//引き算を書く
+      let subStr = step.sub.toString();
+      let j = 0;
+      for (let subDigit of subStr) {
+        let subValue = Number(subDigit);//なくても良い
+        putDigit(k, 3 + i - subStr.length + 1 + j, subValue);
+        j++;
+      }
+      k++; //筆算を１行下にする
     }
-    putDigit(4 + step.index * 2, 3 + step.index, step.amari);
+  }
+  if(i===str.length-1){
+    putDigit(k, 3+i, step.amari);
   }
 });
-*/
+
