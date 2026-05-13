@@ -1,7 +1,8 @@
 //a÷b=c...d
-const a = 502;
+const a = 634;
 const b = 5;
 let str = a.toString(); //割られる数を文字列に変換
+let bStr=b.toString();
 let sho = 0;
 let amari = 0;
 let target = 0;
@@ -19,11 +20,18 @@ function putDigit(row, col, value) {
   document.getElementById("hissan-container").appendChild(div);
 }
 
-putDigit(2, 1, b);
-putDigit(2, 2, ")");
+
+putDigit(2, 4, ")");
+
+let i=0;
+for (let digit of bStr){
+    putDigit(2, 3-bStr.length+1+i, digit);
+    i++;
+}
+
 
 //割られる数を左から1つずつ見ていく
-let i = 0;
+i = 0;
 let flag = 0;
 
 for (let digit of str) {
@@ -55,35 +63,42 @@ for (let digit of str) {
 //ステップごとに描画していく
 let k = 3;
 steps.forEach((step, i) => {
-  putDigit(2, 3 + i, str[i]); //割られる数
+  putDigit(2, 5 + i, str[i]); //割られる数
 
   if (step.flag>1 && step.index > 0) {//ターゲットを新しく描画（あまりと下ろし）
     let targetStr = step.target.toString();
     let m = 0;
     for (let targetDigit of targetStr) {
       let targetValue = Number(targetDigit);//なくても良い
-      putDigit(k, 3 + i - targetStr.length + 1 + m, targetValue);
+      putDigit(k, 5 + i - targetStr.length + 1 + m, targetValue);
       m++;
     }
     k++; //筆算を１行下にする
   }
 
   if (step.flag>0) {
-    putDigit(1, 3 + i, step.sho);//商を書く（左側の０以外）
+    putDigit(1, 5 + i, step.sho);//商を書く（左側の０以外）
 
     if (step.sho > 0) {//引き算を書く
       let subStr = step.sub.toString();
       let j = 0;
       for (let subDigit of subStr) {
         let subValue = Number(subDigit);//なくても良い
-        putDigit(k, 3 + i - subStr.length + 1 + j, subValue);
+        putDigit(k, 5 + i - subStr.length + 1 + j, subValue);
         j++;
       }
       k++; //筆算を１行下にする
     }
   }
+  
   if(i===str.length-1){
-    putDigit(k, 3+i, step.amari);
+  let n=0;
+  for(digit of step.amari.toString()){  
+    putDigit(k, 5+i-step.amari.toString().length+1+n, digit);
+    n++;
   }
+
+  }
+  
 });
 
