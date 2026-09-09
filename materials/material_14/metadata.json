@@ -1,0 +1,6 @@
+{
+  "name": "わり算の筆算れんしゅう",
+  "description": "小学生向けのステップバイステップで学べるわり算の筆算練習・プレビューアプリ",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

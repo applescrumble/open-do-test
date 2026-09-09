@@ -70,6 +70,12 @@ export const appList = [
     desc: "",
     link: "materials/material_12",
     image: "materials/material_12/thumb.webp"
+  },
+  { 
+    title: "割り算の筆算", 
+    desc: "",
+    link: "materials/material_14",
+    image: "materials/material_14/thumb.webp"
   }
 ];
 /*
