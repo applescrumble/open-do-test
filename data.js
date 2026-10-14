@@ -74,7 +74,7 @@ export const appList = [
   { 
     title: "割り算の筆算", 
     desc: "",
-    link: "materials/material_14",
+    link: "materials/material_14/dist",
     image: "materials/material_14/thumb.webp"
   }
 ];
